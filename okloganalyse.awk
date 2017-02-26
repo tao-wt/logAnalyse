@@ -1,6 +1,7 @@
 # analyse cmp's log
 # start the analyse script while test is stable 
-# writer SY60216 # usage:
+# writer SY60216 
+# usage:
 #   awk -f okloganalyse.awk inputfile
 BEGIN{ 
 	starttime="2017-02-13" 
@@ -153,7 +154,7 @@ function countTime(getDate,getTime)
 			itime=countTime(realTime1,realTime2)   
 			printf("D1:%s[------]%s %s[------]%d[------]%s\n",++sentId,realTime1,realTime2,itime,A1S[len])   
 			sub(/false|true/,"",A1S[len])  
-			 printf("D1:%s %d %s\n",sentId,itime,A1S[len])>>outfile   
+			printf("D1:%s %d %s\n",sentId,itime,A1S[len])>>outfile   
 			close(outfile)  
 		}  
 		if($0~/^2017\-02\-[0-2][0-9]\ [0-2][0-9]\:[0-5][0-9]\:/)  
@@ -177,7 +178,8 @@ function countTime(getDate,getTime)
 		}  
 		itime=countTime(realTime1,realTime2)  
 		printf("D1':%s[------]%s %s[------]%d[------]%s\n",++timeoutId,realTime1,realTime2,itime,A1S[len])  
-		sub(/false|true/,"",A1S[len])  printf("D1':%s %d %s\n",timeoutId,itime,A1S[len])>>outfile  
+		sub(/false|true/,"",A1S[len])  
+		printf("D1':%s %d %s\n",timeoutId,itime,A1S[len])>>outfile  
 		close(outfile)  
 		if($0~/^2017\-02\-[0-2][0-9]\ [0-2][0-9]\:[0-5][0-9]\:/)  
 		{   
@@ -201,7 +203,8 @@ function countTime(getDate,getTime)
 		printf("D1'':%s[------]%s %s[------]%d[------]%s\n",++failId,realTime1,realTime2,itime,A1S[len])  
 		sub(/false|true/,"",A1S[len])  
 		printf("D1'':%s %d %s\n",failId,itime,A1S[len])>>outfile  
-		close(outfile)  if($0~/^2017\-02\-[0-2][0-9]\ [0-2][0-9]\:[0-5][0-9]\:/)  
+		close(outfile)  
+		if($0~/^2017\-02\-[0-2][0-9]\ [0-2][0-9]\:[0-5][0-9]\:/)  
 		{   
 			realTime1=$1;realTime2=$2;  
 		} 

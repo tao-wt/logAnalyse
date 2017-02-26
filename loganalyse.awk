@@ -1,6 +1,7 @@
 # analyse cmp's log
 # start the analyse script while test is stable 
-# writer SY60216 # usage:
+# writer SY60216 
+# usage:
 #	awk -f loganalyse.awk inputfile
 BEGIN{
 	starttime="2017-02-13"
@@ -10,7 +11,8 @@ BEGIN{
 	realTime2="" 
 	establishdCmd="netstat -aplno | awk '$0~/9086/ && $0~/ESTABLISHED/' | wc -l" 
 	closewaitCmd="netstat -aplno | awk '$0~/9086/ && $0~/CLOSE_WAIT/' | wc -l" 
-	if ($0~/.*2017\-02\-13.*/)  startlines=NR
+	if ($0~/.*2017\-02\-13.*/)  
+		startlines=NR
 }
 { 
 	if (NR>=startlines)

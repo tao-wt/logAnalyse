@@ -1,6 +1,7 @@
 # analyse cmp's log
 # start the analyse script while test is stable 
-# writer SY60216 # usage:
+# writer SY60216 
+# usage:
 #   awk -f okloganalyse.awk inputfile
 BEGIN{ 
 	outfile="./out/log_1_time" 
@@ -76,4 +77,4 @@ END{ 
 	printf("D1T_A1T_MIN=%d,B1T_A1T_MIN=%d,C1T_B1T_MIN=%d,D1T_B1T_MIN=%d\n",D1T_A1T_MIN,B1T_A1T_MIN,C1T_B1T_MIN,D1T_B1T_MIN) 
 	printf("D1T_A1T_AV=%d,B1T_A1T_AV=%d,C1T_B1T_AV=%d,D1T_B1T_AV=%d\n",D1T_A1T_SUM/i,B1T_A1T_SUM/i,C1T_B1T_SUM/i,D1T_B1T_SUM/i)
 }
-}
+

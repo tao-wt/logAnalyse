@@ -1,7 +1,8 @@
 # analyse cmp's log
 # start the analyse script while test is stable 
 # writer SY60216 
-# usage:#  awk -f loganalyse.awk inputfile
+# usage:
+#  awk -f loganalyse.awk inputfile
 BEGIN{ 
 	key="";num=0 
 	values="" 
