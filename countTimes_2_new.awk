@@ -1,1 +1,121 @@
-#spaceanalysespacecmp'sspacelogPLY#spacestartspacethespaceanalysespacescriptspacewhilespacetestspaceisspacestablespacePLY#spacewriterspaceSY60216spacePLY#spaceusage:PLY#TABTABTABawkspace-fspaceokloganalyse.awkspaceinputfilePLYPLYBEGIN{PLYTABoutfile="./out/log_2_time";num=0PLYTABA2T=0;B2T=0;C2T=0;D2T=0;j=0PLYTABvalues="";maestring=""PLYTABa=0;b=0;c=0;d=0PLYTABsystem("rmspace-rfspace"spaceoutfile)PLYTABoutfile_2="./out/methodAndevent_2"PLYTABsystem("rmspace-rfspace"spaceoutfile_2)PLYTABkey="";i=0;D2T_A2T_SUM=0;B2T_A2T_SUM=0;C2T_B2T_SUM=0;D2T_C2T_SUM=0PLYTABD2T_A2T_MAX=0;B2T_A2T_MAX=0;C2T_B2T_MAX=0;D2T_C2T_MAX=0PLYTABD2T_A2T_MIN=90;B2T_A2T_MIN=90;C2T_B2T_MIN=90;D2T_C2T_MIN=90PLY}PLY{PLYTABif(NF==0)spacekey=$3PLYTABif($3==key)PLYTAB{PLYTABTABj++PLYTABTABif($0~/^A2.*/)spacePLYTABTAB{PLYTABTABTABA2T=$2;maestring=$4;a++;PLYTABTAB}PLYTABTABelsespaceif($0~/^B2.*/)spacePLYTABTAB{PLYTABTABTABB2T=$2;b++PLYTABTAB}PLYTABTABelsespaceif($0~/C2.*/)spacePLYTABTAB{PLYTABTABTABC2T=$2;c++PLYTABTAB}PLYTABTABelsespaceif($0~/D2.*/)spacePLYTABTAB{PLYTABTABTABD2T=$2;d++PLYTABTAB}PLYTAB}PLYTABelsespacePLYTAB{PLYTABTABif(j==4space&&spaceA2T>0space&&spaceB2T>0space&&spaceC2T>0space&&spaceD2T>0space&&spaceD2T-A2T>=0space&&spaceB2T-A2T>=0space&&spaceC2T-B2T>=0space&&spaceD2T-C2T>=0)PLYTABTAB{PLYTABTABTABi++PLYTABTABTABD2T_A2T_SUM+=D2T-A2T;B2T_A2T_SUM+=B2T-A2T;C2T_B2T_SUM+=C2T-B2T;D2T_C2T_SUM+=D2T-C2TPLYTABTABTABD2T_A2T_MAX=(D2T-A2T>D2T_A2T_MAX)?spaceD2T-A2T:D2T_A2T_MAXPLYTABTABTABD2T_A2T_MIN=(D2T-A2T<D2T_A2T_MIN)?spaceD2T-A2T:D2T_A2T_MINPLYTABTABTABB2T_A2T_MAX=(B2T-A2T>B2T_A2T_MAX)?spaceB2T-A2T:B2T_A2T_MAXPLYTABTABTABB2T_A2T_MIN=(B2T-A2T<B2T_A2T_MIN)?spaceB2T-A2T:B2T_A2T_MINPLYTABTABTABC2T_B2T_MAX=(C2T-B2T>C2T_B2T_MAX)?spaceC2T-B2T:C2T_B2T_MAXPLYTABTABTABC2T_B2T_MIN=(C2T-B2T<C2T_B2T_MIN)?spaceC2T-B2T:C2T_B2T_MINPLYTABTABTABD2T_C2T_MAX=(D2T-C2T>D2T_C2T_MAX)?spaceD2T-C2T:D2T_C2T_MAXPLYTABTABTABD2T_C2T_MIN=(D2T-C2T<D2T_C2T_MIN)?spaceD2T-C2T:D2T_C2T_MINPLYTABTABTABprintspacekey,A2T,B2T,C2T,D2T,D2T-A2T,B2T-A2T,C2T-B2T,D2T-B2TPLYTABTABTABprintspacekey,A2T,B2T,C2T,D2T,D2T-A2T,B2T-A2T,C2T-B2T,D2T-B2Tspace>>outfilePLYTABTABTABclose(outfile)PLYTABTAB}PLYTABTABif(j!=4)PLYTABTAB{PLYTABTABTAB#printspace"-------------------------------------------------------------------------------------------------------------------------------------"PLYTABTABTABnum++PLYTABTABTABif(a>b)spacevalues=valuesspace"spaceB"PLYTABTABTABif(a>c)spacevalues=valuesspace"spaceC"PLYTABTABTABif(a>d)spacevalues=valuesspace"spaceD"PLYTABTABTABif(maestring!="")PLYTABTABTAB{PLYTABTABTABTABout="./out/"spacemaestringspace"_2"PLYTABTABTABTABif(maestringspaceinspaceiarray)PLYTABTABTABTAB{PLYTABTABTABTABTABiarray[maestring]+=1PLYTABTABTABTAB}PLYTABTABTABTABelsePLYTABTABTABTAB{PLYTABTABTABTABTABiarray[maestring]=1PLYTABTABTABTABTABprintspacemaestringspace>outPLYTABTABTABTAB}PLYTABTABTABTABprintspacenum,"|",maestring,"|",key,"|",valuesspace,"|",jPLYTABTABTABTABprintspacekey,valuesspace>>outPLYTABTABTABTABclose(out)PLYTABTABTABTABfor(namespaceinspaceiarray)PLYTABTABTABTABTABprintspacename,"spaceapproachspace",iarray[name]space>outfile_2PLYTABTABTABTABclose(outfile_2)PLYTABTABTAB}PLYTABTAB}PLYTABTABA2T=0;B2T=0;C2T=0;D2T=0;j=1PLYTABTABkey=$3PLYTABTABif($0~/^A2.*/)spacePLYTABTAB{PLYTABTABTABA2T=$2;maestring=$4;a++;PLYTABTAB}PLYTABTABelsespaceif($0~/^B2.*/)spacePLYTABTAB{PLYTABTABTABB2T=$2;b++PLYTABTAB}PLYTABTABelsespaceif($0~/C2.*/)spacePLYTABTAB{PLYTABTABTABC2T=$2;c++PLYTABTAB}PLYTABTABelsespaceif($0~/D2.*/)spacePLYTABTAB{PLYTABTABTABD2T=$2;d++PLYTABTAB}PLYTAB}PLY}PLYEND{PLYTABprintf("D2T_A2T_MAX=%d,B2T_A2T_MAX=%d,C2T_B2T_MAX=%d,D2T_C2T_MAX=%d\n",D2T_A2T_MAX,B2T_A2T_MAX,C2T_B2T_MAX,D2T_C2T_MAX)PLYTABprintf("D2T_A2T_MIN=%d,B2T_A2T_MIN=%d,C2T_B2T_MIN=%d,D2T_C2T_MIN=%d\n",D2T_A2T_MIN,B2T_A2T_MIN,C2T_B2T_MIN,D2T_C2T_MIN)PLYTABprintf("D2T_A2T_AV=%d,B2T_A2T_AV=%d,C2T_B2T_AV=%d,D2T_C2T_AV=%d\n",D2T_A2T_SUM/i,B2T_A2T_SUM/i,C2T_B2T_SUM/i,D2T_C2T_SUM/i)PLYTABprintf("D2T_A2T_MAX=%d,B2T_A2T_MAX=%d,C2T_B2T_MAX=%d,D2T_C2T_MAX=%d\n",D2T_A2T_MAX,B2T_A2T_MAX,C2T_B2T_MAX,D2T_C2T_MAX)>>outfilePLYTABclose(outfile)PLYTABprintf("D2T_A2T_MIN=%d,B2T_A2T_MIN=%d,C2T_B2T_MIN=%d,D2T_C2T_MIN=%d\n",D2T_A2T_MIN,B2T_A2T_MIN,C2T_B2T_MIN,D2T_C2T_MIN)>>outfilePLYTABclose(outfile)PLYTABprintf("D2T_A2T_AV=%d,B2T_A2T_AV=%d,C2T_B2T_AV=%d,D2T_C2T_AV=%d\n",D2T_A2T_SUM/i,B2T_A2T_SUM/i,C2T_B2T_SUM/i,D2T_C2T_SUM/i)>>outfilePLYTABclose(outfile)PLYTABfor(namespaceinspaceiarray)PLYTABTABprintspacename,"spaceapproachspace",iarray[name]PLY}PLYPLYPLY
+# analyse cmp's log
+# start the analyse script while test is stable 
+# writer SY60216 
+# usage:
+#			awk -f okloganalyse.awk inputfile
+
+BEGIN{
+	outfile="./out/log_2_time";num=0
+	A2T=0;B2T=0;C2T=0;D2T=0;j=0
+	values="";maestring=""
+	a=0;b=0;c=0;d=0
+	system("rm -rf " outfile)
+	outfile_2="./out/methodAndevent_2"
+	system("rm -rf " outfile_2)
+	key="";i=0;D2T_A2T_SUM=0;B2T_A2T_SUM=0;C2T_B2T_SUM=0;D2T_C2T_SUM=0
+	D2T_A2T_MAX=0;B2T_A2T_MAX=0;C2T_B2T_MAX=0;D2T_C2T_MAX=0
+	D2T_A2T_MIN=90;B2T_A2T_MIN=90;C2T_B2T_MIN=90;D2T_C2T_MIN=90
+}
+{
+	if(NF==0) key=$3
+	if($3==key)
+	{
+		j++
+		if($0~/^A2.*/) 
+		{
+			A2T=$2;maestring=$4;a++;
+		}
+		else if($0~/^B2.*/) 
+		{
+			B2T=$2;b++
+		}
+		else if($0~/C2.*/) 
+		{
+			C2T=$2;c++
+		}
+		else if($0~/D2.*/) 
+		{
+			D2T=$2;d++
+		}
+	}
+	else 
+	{
+		if(j==4 && A2T>0 && B2T>0 && C2T>0 && D2T>0 && D2T-A2T>=0 && B2T-A2T>=0 && C2T-B2T>=0 && D2T-C2T>=0)
+		{
+			i++
+			D2T_A2T_SUM+=D2T-A2T;B2T_A2T_SUM+=B2T-A2T;C2T_B2T_SUM+=C2T-B2T;D2T_C2T_SUM+=D2T-C2T
+			D2T_A2T_MAX=(D2T-A2T>D2T_A2T_MAX)? D2T-A2T:D2T_A2T_MAX
+			D2T_A2T_MIN=(D2T-A2T<D2T_A2T_MIN)? D2T-A2T:D2T_A2T_MIN
+			B2T_A2T_MAX=(B2T-A2T>B2T_A2T_MAX)? B2T-A2T:B2T_A2T_MAX
+			B2T_A2T_MIN=(B2T-A2T<B2T_A2T_MIN)? B2T-A2T:B2T_A2T_MIN
+			C2T_B2T_MAX=(C2T-B2T>C2T_B2T_MAX)? C2T-B2T:C2T_B2T_MAX
+			C2T_B2T_MIN=(C2T-B2T<C2T_B2T_MIN)? C2T-B2T:C2T_B2T_MIN
+			D2T_C2T_MAX=(D2T-C2T>D2T_C2T_MAX)? D2T-C2T:D2T_C2T_MAX
+			D2T_C2T_MIN=(D2T-C2T<D2T_C2T_MIN)? D2T-C2T:D2T_C2T_MIN
+			print key,A2T,B2T,C2T,D2T,D2T-A2T,B2T-A2T,C2T-B2T,D2T-B2T
+			print key,A2T,B2T,C2T,D2T,D2T-A2T,B2T-A2T,C2T-B2T,D2T-B2T >>outfile
+			close(outfile)
+		}
+		if(j!=4)
+		{
+			#print "-------------------------------------------------------------------------------------------------------------------------------------"
+			num++
+			if(a>b) values=values " B"
+			if(a>c) values=values " C"
+			if(a>d) values=values " D"
+			if(maestring!="")
+			{
+				out="./out/" maestring "_2"
+				if(maestring in iarray)
+				{
+					iarray[maestring]+=1
+				}
+				else
+				{
+					iarray[maestring]=1
+					print maestring >out
+				}
+				print num,"|",maestring,"|",key,"|",values ,"|",j
+				print key,values >>out
+				close(out)
+				for(name in iarray)
+					print name," approach ",iarray[name] >outfile_2
+				close(outfile_2)
+			}
+		}
+		A2T=0;B2T=0;C2T=0;D2T=0;j=1
+		key=$3
+		if($0~/^A2.*/) 
+		{
+			A2T=$2;maestring=$4;a++;
+		}
+		else if($0~/^B2.*/) 
+		{
+			B2T=$2;b++
+		}
+		else if($0~/C2.*/) 
+		{
+			C2T=$2;c++
+		}
+		else if($0~/D2.*/) 
+		{
+			D2T=$2;d++
+		}
+	}
+}
+END{
+	printf("D2T_A2T_MAX=%d,B2T_A2T_MAX=%d,C2T_B2T_MAX=%d,D2T_C2T_MAX=%d\n",D2T_A2T_MAX,B2T_A2T_MAX,C2T_B2T_MAX,D2T_C2T_MAX)
+	printf("D2T_A2T_MIN=%d,B2T_A2T_MIN=%d,C2T_B2T_MIN=%d,D2T_C2T_MIN=%d\n",D2T_A2T_MIN,B2T_A2T_MIN,C2T_B2T_MIN,D2T_C2T_MIN)
+	printf("D2T_A2T_AV=%d,B2T_A2T_AV=%d,C2T_B2T_AV=%d,D2T_C2T_AV=%d\n",D2T_A2T_SUM/i,B2T_A2T_SUM/i,C2T_B2T_SUM/i,D2T_C2T_SUM/i)
+	printf("D2T_A2T_MAX=%d,B2T_A2T_MAX=%d,C2T_B2T_MAX=%d,D2T_C2T_MAX=%d\n",D2T_A2T_MAX,B2T_A2T_MAX,C2T_B2T_MAX,D2T_C2T_MAX)>>outfile
+	close(outfile)
+	printf("D2T_A2T_MIN=%d,B2T_A2T_MIN=%d,C2T_B2T_MIN=%d,D2T_C2T_MIN=%d\n",D2T_A2T_MIN,B2T_A2T_MIN,C2T_B2T_MIN,D2T_C2T_MIN)>>outfile
+	close(outfile)
+	printf("D2T_A2T_AV=%d,B2T_A2T_AV=%d,C2T_B2T_AV=%d,D2T_C2T_AV=%d\n",D2T_A2T_SUM/i,B2T_A2T_SUM/i,C2T_B2T_SUM/i,D2T_C2T_SUM/i)>>outfile
+	close(outfile)
+	for(name in iarray)
+		print name," approach ",iarray[name]
+}
+
+
+

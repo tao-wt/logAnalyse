@@ -1,1 +1,30 @@
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PLY#du参数PLYduspace-schspace*PLY#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PLYrsyncspace-arvzspace--deletespace-espace"sshspace-pspace22"space~/test/spacezhuser@99.12.90.8:/home/zhuser/testPLY#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PLYtcpdumpspacesrcspacehostspace99.12.69.165spaceandspacedstspace99.12.90.100spaceandspaceudpspacespace-vxspace-ispaceeth0space-espacePLYtcpdumpspacedstspacehostspace99.12.69.165spaceandspaceicmpspacespace-vxspace-ispaceeth0space-ePLY#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PLY#space查看物理CPU个数PLYcatspace/proc/cpuinfo|spacegrepspace"physicalspaceid"|spacesort|spaceuniq|spacewcspace-lPLY#space查看每个物理CPU中core的个数(即核数)PLYcatspace/proc/cpuinfo|spacegrepspace"cpuspacecores"|spaceuniqPLY#space查看逻辑CPU的个数PLYcatspace/proc/cpuinfo|spacegrepspace"processor"|spacewcspace-lPLY#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PLYzipspacebak_conf.zipspace./dbconfiglogger.propertiesspace./dbconfig.propertiesspace./webmgr.propertiesspace./WEB-INF/classes/dbconfig.propertiesspace./WEB-INF/classes/config/spring.xmlPLY#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PLYdatePLYhwclockspace--showPLYhwclockspace--setspace--date="2017-02-14space16:43:00"PLYhwclockspace--hctosysPLYhwclockspace--showPLYdatePLY#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PLYsortspace-k3space-k2space./out/log_1space>./out/log_1_sortPLYsortspace-k3space-k2space./out/log_2space>./out/log_2_sortPLYsortspace-k1spacekeyAndMethod_2space|spaceawkspace'{printspace$1}'space|spaceuniqspace>key_2PLYawkspace-F:space-vspacenum=0space-vspacemax=0space-vspacemin=19999space-vspacesum=0space'{num++;sum+=$2;if($2>max){max=$2}spaceif(min>$2){min=$2}}spaceEND{printspace"max=",maxspace;printspace"min=",minspace;print"ava=",sum/numspace}'spacequeuePLY#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#du参数
+du -sch *
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+rsync -arvz --delete -e "ssh -p 22" ~/test/ zhuser@99.12.90.8:/home/zhuser/test
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+tcpdump src host 99.12.69.165 and dst 99.12.90.100 and udp  -vx -i eth0 -e 
+tcpdump dst host 99.12.69.165 and icmp  -vx -i eth0 -e
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# 查看物理CPU个数
+cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
+# 查看每个物理CPU中core的个数(即核数)
+cat /proc/cpuinfo| grep "cpu cores"| uniq
+# 查看逻辑CPU的个数
+cat /proc/cpuinfo| grep "processor"| wc -l
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+zip bak_conf.zip ./dbconfiglogger.properties ./dbconfig.properties ./webmgr.properties ./WEB-INF/classes/dbconfig.properties ./WEB-INF/classes/config/spring.xml
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+date
+hwclock --show
+hwclock --set --date="2017-02-14 16:43:00"
+hwclock --hctosys
+hwclock --show
+date
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+sort -k3 -k2 ./out/log_1 >./out/log_1_sort
+sort -k3 -k2 ./out/log_2 >./out/log_2_sort
+sort -k1 keyAndMethod_2 | awk '{print $1}' | uniq >key_2
+awk -F: -v num=0 -v max=0 -v min=19999 -v sum=0 '{num++;sum+=$2;if($2>max){max=$2} if(min>$2){min=$2}} END{print "max=",max ;print "min=",min ;print"ava=",sum/num }' queue
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
