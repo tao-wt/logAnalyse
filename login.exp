@@ -1,1 +1,26 @@
-#!/usr/local/bin/expectPLY#远程登录并执行命令PLY#usage:PLY#TABTABTABexpectspacelogin.expspaceipspaceuserspacepasswordspaceicmdPLYsetspacetimeoutspace20PLYsetspaceipspace[lindexspace$argvspace0]PLYsetspaceuserspace[lindexspace$argvspace1]PLYsetspacepasswordspace[lindexspace$argvspace2]PLYsetspaceicmdspace[lindexspace$argvspace3]PLYspawnspacesshspace"$user\@$ip"PLYexpectspace{PLY"password:"space{sendspace"$password\r"}PLY"yes/no"space{PLYTABsendspace"yes\r"PLYTABexpectspace"password:"PLYTABsendspace"$password\r"PLY}PLY}PLYexpectspace"*]*"PLYsendspace"$icmd\r";PLY#interactPLYexpectspace"*]$*"PLYsendspace"exit\r";PLYexpectspaceeofspacePLY#interactPLY
+#!/usr/local/bin/expect
+#远程登录并执行命令
+#usage:
+#			expect login.exp ip user password icmd
+set timeout 20
+set ip [lindex $argv 0]
+set user [lindex $argv 1]
+set password [lindex $argv 2]
+set icmd [lindex $argv 3]
+spawn ssh "$user\@$ip"
+expect {
+"password:" {send "$password\r"}
+"yes/no" {
+	send "yes\r"
+	expect "password:"
+	send "$password\r"
+}
+}
+expect "*]*"
+send "$icmd\r";
+#interact
+expect "*]$*"
+send "exit\r";
+expect eof 
+#interact
+

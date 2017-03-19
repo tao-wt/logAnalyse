@@ -1,1 +1,26 @@
-#!/bin/envspacebashPLY#spacewriterspaceSY20216PLY#space脚本功能：获取系统参数信息，配合nohup可放于后台执行;space须3个参数(argv1:端口,argv2:输出的文件,argv3:pid)PLY#spaceusage：spacePLY#TABTABTABbashspacegetInfo.shspaceportspace"path/fileName"spacepidPLYPLYIFS=$'space\t\n'PLYfunc=$1PLYoutfile=$2PLYipid=$3PLYifspace[space-fspace"$outfile"space]PLYthenPLYTABrmspace-fspace$outfilePLYfiPLYPLYwhilespacetruePLYdoPLYTABtopspace-bspace-dspace0space-nspace1space-pspace$ipidspace>>$outfilePLYTABtopspace-bspace-dspace0space-nspace1space-pspace$ipidPLYTABnum=$(netstatspace-anpspace|spacegrepspace$funcspace|spacegrepspaceESTABLISHEDspace|spacegrepspacejavaspace|spacewcspace-l)spacePLYTABechospaceESTABLISHEDspaceofspace$1spaceis:space$numPLYTABechospaceESTABLISHEDspaceofspace$1spaceis:space$numspacespace>>$outfilePLYTABechospace-------------------------------------------------------------------------------------------------space>>$outfilePLYTABechospace-------------------------------------------------------------------------------------------------PLYTABsleepspace2sPLYdone
+#!/bin/env bash
+# writer SY20216
+# 脚本功能：获取系统参数信息，配合nohup可放于后台执行; 须3个参数(argv1:端口,argv2:输出的文件,argv3:pid)
+# usage： 
+#			bash getInfo.sh port "path/fileName" pid
+
+IFS=$' \t\n'
+func=$1
+outfile=$2
+ipid=$3
+if [ -f "$outfile" ]
+then
+	rm -f $outfile
+fi
+
+while true
+do
+	top -b -d 0 -n 1 -p $ipid >>$outfile
+	top -b -d 0 -n 1 -p $ipid
+	num=$(netstat -anp | grep $func | grep ES	LISHED | grep java | wc -l) 
+	echo ES	LISHED of $1 is: $num
+	echo ES	LISHED of $1 is: $num  >>$outfile
+	echo ------------------------------------------------------------------------------------------------- >>$outfile
+	echo -------------------------------------------------------------------------------------------------
+	sleep 2s
+done

@@ -1,1 +1,55 @@
-#spaceanalysespacecmp'sspacelogspacePLY#spacewriterspaceSY60216spacePLY#space分析在间隔t内sf字符串出现的次数,最后输出总次数.PLY#spaceusage:PLY#TABTABTABawkspace-vspacet=""space-vspacesf="string"space-fspaceawkfilename.awkspaceinputfilePLYPLYBEGIN{PLYTABprintspace"t:",t,";spacesf:",sfPLYTABtimeSep=t*60*1000PLYTABitime=0PLYTABsum=0;allsum=0;PLYTABrealTime1=""PLYTABrealTime2=""PLYTABoutfile="./out/timeSep"PLYTAB#outfile_2="./out/timeInfo"PLYTABsystem("mkdirspaceout")PLYTABsystem("rmspace-rfspace"spaceoutfile)PLYTAB#system("rmspace-rfspace"spaceoutfile_2)PLYTABsystem("rmspace-rfspace./out/*space")PLYTABprintspace"analysing......"PLY}PLYfunctionspacecountTime(getDate,getTime)PLY{PLYTABdatelen=split(getDate,idate,"-")PLYTABmouth=idate[datelen-1]PLYTABdate=idate[datelen]PLYTABtimel=split(getTime,itimes,":")PLYTABhour=itimes[1]PLYTABminute=itimes[2]PLYTABsecondl=split(itimes[timel],s,".")PLYTABsecond=s[1]PLYTABmillis=s[secondl]PLYTABcount=(mouth-1)*30*24*60*60*1000+date*24*60*60*1000+hour*60*60*1000+minute*60*1000+second*1000+millisPLYTABreturnspacecountPLY}PLY/^2017\-[0,1][0-9]\-[0-3][0-9]\space[0-2][0-9]\:[0-5][0-9]\:/space{PLYTABitime_new=countTime($1,$2)PLYTABif(itime_new-itime>=timeSep){PLYTABTABprintspace"==========================================================================="PLYTABTABprintspace"[",realTime1,"space",realTime2,"]space~space[",$1,"space",$2,"]spacehave:space",sumPLYTABTABprintspace"[",realTime1,"space",realTime2,"]space~space[",$1,"space",$2,"]spacehave:space",sumspace>>outfilePLYTABTABclose(outfile)PLYTABTABitime=itime_new;sum=0;PLYTABTABrealTime1=$1;realTime2=$2;PLYTAB}PLY}PLYindex($0,sf)space{PLYTABsum++;allsum++;PLY}PLYEND{PLYTABprintspace"==========================================================================="PLYTABprintf("thespacesumspaceofspacestringspaceisspace:%d\n",allsum)PLY}PLYPLY
+# analyse cmp's log 
+# writer SY60216 
+# 分析在间隔t内sf字符串出现的次数,最后输出总次数.
+# usage:
+#			awk -v t="" -v sf="string" -f awkfilename.awk inputfile
+
+BEGIN{
+	print "t:",t,"; sf:",sf
+	timeSep=t*60*1000
+	itime=0
+	sum=0;allsum=0;
+	realTime1=""
+	realTime2=""
+	outfile="./out/timeSep"
+	#outfile_2="./out/timeInfo"
+	system("mkdir out")
+	system("rm -rf " outfile)
+	#system("rm -rf " outfile_2)
+	system("rm -rf ./out/* ")
+	print "analysing......"
+}
+function countTime(getDate,getTime)
+{
+	datelen=split(getDate,idate,"-")
+	mouth=idate[datelen-1]
+	date=idate[datelen]
+	timel=split(getTime,itimes,":")
+	hour=itimes[1]
+	minute=itimes[2]
+	secondl=split(itimes[timel],s,".")
+	second=s[1]
+	millis=s[secondl]
+	count=(mouth-1)*30*24*60*60*1000+date*24*60*60*1000+hour*60*60*1000+minute*60*1000+second*1000+millis
+	return count
+}
+/^2017\-[0,1][0-9]\-[0-3][0-9]\ [0-2][0-9]\:[0-5][0-9]\:/ {
+	itime_new=countTime($1,$2)
+	if(itime_new-itime>=timeSep){
+		print "==========================================================================="
+		print "[",realTime1," ",realTime2,"] ~ [",$1," ",$2,"] have: ",sum
+		print "[",realTime1," ",realTime2,"] ~ [",$1," ",$2,"] have: ",sum >>outfile
+		close(outfile)
+		itime=itime_new;sum=0;
+		realTime1=$1;realTime2=$2;
+	}
+}
+index($0,sf) {
+	sum++;allsum++;
+}
+END{
+	print "==========================================================================="
+	printf("the sum of string is :%d\n",allsum)
+}
+
+
