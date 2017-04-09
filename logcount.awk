@@ -1,1 +1,104 @@
-#spaceanalysespacecmp'sspacelogPLY#spacestartspacethespaceanalysespacescriptspacewhilespacetestspaceisspacestablespacePLY#spacewriterspaceSY60216spacePLY#spaceusage:PLY#TABTABTABawkspace-vspaces="01-20space9:45:56.111"space-vspacee="2-28space13:45:25.000"space-fspaceawkfilename.awkspaceinputfilePLYPLYBEGIN{PLYTABprintspace"st:",st,"en:",enPLYTABstlen=split(st,sta,"space")PLYTABtimeStart=countTime(sta[slten-1],sta[stlen])PLYTABenlen=split(en,ena,"space")PLYTABtimeEnd=countTime(ena[enlen-1],ena[enlen])PLYTABitime=0PLYTABreceiveId=0PLYTABrealTime1=""PLYTABrealTime2=""PLYTABoutfile="./out/timeoutLog"PLYTABoutfile_2="./out/methodaevent"PLYTABsystem("rmspace-rfspace"spaceoutfile)PLYTABsystem("rmspace-rfspace"spaceoutfile_2)PLYTABsystem("rmspace-rfspace./out/*space")PLYTABprintspace"请等待..."PLY}PLYfunctionspacecountTime(getDate,getTime)PLY{PLYTABdatelen=split(getDate,idate,"-")PLYTABmouth=idate[datelen-1]PLYTABdate=idate[datelen]PLYTABtimel=split(getTime,itimes,":")PLYTABhour=itimes[1]PLYTABminute=itimes[2]PLYTABsecondl=split(itimes[timel],s,".")PLYTABsecond=s[1]PLYTABmillis=s[secondl]PLYTABcount=(mouth-1)*30*24*60*60*1000+date*24*60*60*1000+hour*60*60*1000+minute*60*1000+second*1000+millisPLYTABreturnspacecountPLY}PLYfunctionspaceiAnalyse(ivar)PLY{PLY}PLY{PLYTABif($0~/^2017\-[0,1][0-9]\-[0-3][0-9]\space[0-2][0-9]\:[0-5][0-9]\:/)PLYTAB{PLYTABTABrealTime1=$1;realTime2=$2;PLYTABTABitime=countTime(realTime1,realTime2)PLYTABTABif(itime>timeEnd)spaceexitPLYTAB}PLYTABelsespaceif($0~/^CinRequest\spacehas\spacebeen\spacereceived.*/space&&spaceitime>timeStartspace&&spaceitime<timeEnd)PLYTAB{PLYTABTABprintspace"================================="PLYTABTABprintspacerealTime1,realTime2PLYTABTABMethod=""PLYTABTABEvent=""PLYTABTABfor(;getlinespace&&space$0!~/^2017\-[0,1][0-9]\-[0-3][0-9]\space[0-2][0-9]\:[0-5][0-9]\:/;)PLYTABTAB{PLYTABTABTABif($0~/^Method.*/)spacePLYTABTABTAB{PLYTABTABTABTABsub(/\r/,"",$0)PLYTABTABTABTABlenS=split($0,A1SS,"space:space")PLYTABTABTABTABMethod=A1SS[lenS]PLYTABTABTABTABPLYTABTABTAB}PLYTABTABTABif($0~/^Event.*/)spacePLYTABTABTAB{PLYTABTABTABTABsub(/\r/,"",$0)PLYTABTABTABTABlenS=split($0,A1SS,"space:space")PLYTABTABTABTABlenSS=split(A1SS[lenS],A1SSS,"|")PLYTABTABTABTABlenSSS=split(A1SSS[2],A1SSSS,")")PLYTABTABTABTABEvent=A1SSSS[2]PLYTABTABTABTABPLYTABTABTAB}PLYTABTABTABif($0~/^CinRequest\spacehas\spacebeen\spacereceived.*/)spacereceiveId++PLYTABTAB}PLYTABTABprintf("%sspace%s/%s\n",++receiveId,Method,Event)>>outfilePLYTABTABclose(outfile)PLYTABTABprintf("%sspace%s/%s\n",receiveId,Method,Event)PLYTABTABMAE=Methodspace"/"spaceEventPLYTABTABif(MAEspaceinspacearray)PLYTABTAB{PLYTABTABTABarray[MAE]+=1PLYTABTAB}PLYTABTABelsePLYTABTAB{PLYTABTABTABarray[MAE]=1PLYTABTAB}PLYTABTABfor(namespaceinspacearray)PLYTABTABTABprintspacename,array[name]space>outfile_2PLYTABTABclose(outfile_2)PLYTABTABif($0~/^2017\-[0,1][0-9]\-[0-3][0-9]\space[0-2][0-9]\:[0-5][0-9]\:/)PLYTABTAB{PLYTABTABTABrealTime1=$1;realTime2=$2;PLYTABTABTABitime=countTime(realTime1,realTime2)PLYTABTABTABif(itime>timeEnd)spaceexitPLYTABTAB}PLYTAB}PLY}PLYEND{PLYTABprintspace"================================="PLYTABprintf("thespacesumspaceofspaceTransactionspaceFROMspaceclientspacesendspaceTimeoutspacepacketsspaceisspace:%d\n",receiveId)PLYTABfor(namespaceinspacearray)PLYTABTABprintspacename,array[name]PLY}PLYPLY
+# analyse cmp's log
+# start the analyse script while test is stable 
+# writer SY60216 
+# usage:
+#			awk -v s="01-20 9:45:56.111" -v e="2-28 13:45:25.000" -f awkfilename.awk inputfile
+
+BEGIN{
+	print "st:",st,"en:",en
+	stlen=split(st,sta," ")
+	timeStart=countTime(sta[slten-1],sta[stlen])
+	enlen=split(en,ena," ")
+	timeEnd=countTime(ena[enlen-1],ena[enlen])
+	itime=0
+	receiveId=0
+	realTime1=""
+	realTime2=""
+	outfile="./out/timeoutLog"
+	outfile_2="./out/methodaevent"
+	system("rm -rf " outfile)
+	system("rm -rf " outfile_2)
+	system("rm -rf ./out/* ")
+	print "请等待..."
+}
+function countTime(getDate,getTime)
+{
+	datelen=split(getDate,idate,"-")
+	mouth=idate[datelen-1]
+	date=idate[datelen]
+	timel=split(getTime,itimes,":")
+	hour=itimes[1]
+	minute=itimes[2]
+	secondl=split(itimes[timel],s,".")
+	second=s[1]
+	millis=s[secondl]
+	count=(mouth-1)*30*24*60*60*1000+date*24*60*60*1000+hour*60*60*1000+minute*60*1000+second*1000+millis
+	return count
+}
+function iAnalyse(ivar)
+{
+}
+{
+	if($0~/^2017\-[0,1][0-9]\-[0-3][0-9]\ [0-2][0-9]\:[0-5][0-9]\:/)
+	{
+		realTime1=$1;realTime2=$2;
+		itime=countTime(realTime1,realTime2)
+		if(itime>timeEnd) exit
+	}
+	else if($0~/^CinRequest\ has\ been\ received.*/ && itime>timeStart && itime<timeEnd)
+	{
+		print "================================="
+		print realTime1,realTime2
+		Method=""
+		Event=""
+		for(;getline && $0!~/^2017\-[0,1][0-9]\-[0-3][0-9]\ [0-2][0-9]\:[0-5][0-9]\:/;)
+		{
+			if($0~/^Method.*/) 
+			{
+				sub(/\r/,"",$0)
+				lenS=split($0,A1SS," : ")
+				Method=A1SS[lenS]
+				
+			}
+			if($0~/^Event.*/) 
+			{
+				sub(/\r/,"",$0)
+				lenS=split($0,A1SS," : ")
+				lenSS=split(A1SS[lenS],A1SSS,"|")
+				lenSSS=split(A1SSS[2],A1SSSS,")")
+				Event=A1SSSS[2]
+				
+			}
+			if($0~/^CinRequest\ has\ been\ received.*/) receiveId++
+		}
+		printf("%s %s/%s\n",++receiveId,Method,Event)>>outfile
+		close(outfile)
+		printf("%s %s/%s\n",receiveId,Method,Event)
+		MAE=Method "/" Event
+		if(MAE in array)
+		{
+			array[MAE]+=1
+		}
+		else
+		{
+			array[MAE]=1
+		}
+		for(name in array)
+			print name,array[name] >outfile_2
+		close(outfile_2)
+		if($0~/^2017\-[0,1][0-9]\-[0-3][0-9]\ [0-2][0-9]\:[0-5][0-9]\:/)
+		{
+			realTime1=$1;realTime2=$2;
+			itime=countTime(realTime1,realTime2)
+			if(itime>timeEnd) exit
+		}
+	}
+}
+END{
+	print "================================="
+	printf("the sum of Transaction FROM client send Timeout packets is :%d\n",receiveId)
+	for(name in array)
+		print name,array[name]
+}
+
+
